@@ -69,7 +69,7 @@
           <configuration>
             <url>http://localhost:8080/manager/text</url>
             <server>tomcat9</server>
-            <path>/StellarOdisey</path>
+            <path>/StellarOdyssey</path>
             <username>tomcat</username>
             <password>tomcat</password>
           </configuration>
