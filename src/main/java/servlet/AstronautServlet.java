@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/astronauts")
+@WebServlet("/astronaut")
 public class AstronautServlet extends HttpServlet {
     private AstronautDAO astronautDAO;
 
@@ -60,12 +60,13 @@ public class AstronautServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         List<Astronaut> list = astronautDAO.getAllAstronauts();
         req.setAttribute("astronautList", list);
-        req.getRequestDispatcher("/astronaut-list.jsp").forward(req, resp);
+        // Ahora apunta a la carpeta /jsp/
+        req.getRequestDispatcher("/jsp/astronaut-list.jsp").forward(req, resp);
     }
 
     private void showNewForm(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/astronaut-form.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/astronaut-form.jsp").forward(req, resp);
     }
 
     private void showEditForm(HttpServletRequest req, HttpServletResponse resp)
@@ -73,7 +74,7 @@ public class AstronautServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Astronaut existing = astronautDAO.getAstronautById(id);
         req.setAttribute("astronaut", existing);
-        req.getRequestDispatcher("/astronaut-form.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/astronaut-form.jsp").forward(req, resp);
     }
 
     private void showDetail(HttpServletRequest req, HttpServletResponse resp)
@@ -81,14 +82,15 @@ public class AstronautServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Astronaut astronaut = astronautDAO.getAstronautById(id);
         req.setAttribute("astronaut", astronaut);
-        req.getRequestDispatcher("/astronaut-detail.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/astronaut-detail.jsp").forward(req, resp);
     }
 
     private void deleteAstronaut(HttpServletRequest req, HttpServletResponse resp)
             throws SQLException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         astronautDAO.deleteAstronaut(id);
-        resp.sendRedirect("astronauts");
+        // Redirige de nuevo al servlet, que listará desde /jsp/astronaut-list.jsp
+        resp.sendRedirect("astronaut");
     }
 
     @Override
@@ -114,6 +116,6 @@ public class AstronautServlet extends HttpServlet {
             throw new ServletException("Error al guardar astronauta", e);
         }
 
-        resp.sendRedirect("astronauts");
+        resp.sendRedirect("astronaut");
     }
 }

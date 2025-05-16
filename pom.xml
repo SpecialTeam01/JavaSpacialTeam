@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="
+           http://maven.apache.org/POM/4.0.0
+           http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>StellarOdisey</groupId>
@@ -10,12 +13,14 @@
   <packaging>war</packaging>
 
   <properties>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <!-- Codificación de ficheros fuente -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- bytecode y nivel de fuente/target para Java 11 -->
+    <maven.compiler.release>11</maven.compiler.release>
   </properties>
 
   <dependencies>
+    <!-- Servlet API, proporcionada por Tomcat -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -23,58 +28,57 @@
       <scope>provided</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.mariadb.jdbc</groupId>
-      <artifactId>mariadb-java-client</artifactId>
-      <version>3.5.2</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.36</version>
-      <scope>provided</scope>
-    </dependency>
-
+    <!-- Conector MySQL -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.33</version>
     </dependency>
 
+    <!-- Lombok (opcional) -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.36</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
-    <build>
+  <build>
     <finalName>StellarOdisey</finalName>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
-        </plugin>
 
-        <!--
-          mvn tomcat7:deploy para desplegar
-          mvn tomcat7:undeploy para replegar
-          mvn tomcat7:redeploy para redesplegar
-       -->
+    <plugins>
+      <!-- Compila a Java 11 -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.10.1</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
 
-        <plugin>
-          <groupId>org.apache.tomcat.maven</groupId>
-          <artifactId>tomcat7-maven-plugin</artifactId>
-          <version>2.2</version>
-          <configuration>
-            <url>http://localhost:8080/manager/text</url>
-            <port>8080</port>
-            <path>/StellarOdissey</path>
-            <username>tomcat</username>
-            <password>tomcat</password>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
+      <!-- Empaqueta el WAR -->
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.2</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+
+      <!-- Despliegue en Tomcat -->
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <url>http://localhost:8080/manager/text</url>
+          <path>/StellarOdisey</path>
+          <username>tomcat</username>
+          <password>tomcat</password>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
-
 
 </project>

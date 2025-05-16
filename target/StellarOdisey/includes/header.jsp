@@ -36,17 +36,17 @@
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/astronauts">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/astronaut">
                         <i class="fa-solid fa-user-astronaut"></i> Astronauts
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/planets">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/planet">
                         <i class="fa-solid fa-globe"></i> Planets
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/missions">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/mission">
                         <i class="fa-solid fa-hammer"></i> Missions
                     </a>
                 </li>

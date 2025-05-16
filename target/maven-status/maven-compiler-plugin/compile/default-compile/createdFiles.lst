@@ -1,6 +1,5 @@
 dao\MissionDAO.class
 model\Planet.class
-servlet\HomeServlet.class
 utils\DBConnection.class
 dao\AstronautDAO.class
 dao\PlanetDAO.class

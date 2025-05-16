@@ -18,7 +18,7 @@
                         <p class="card-text">Meet our brave explorers.</p>
                     </div>
                     <div class="card-footer bg-transparent">
-                        <a href="${pageContext.request.contextPath}/astronauts"
+                        <a href="${pageContext.request.contextPath}/astronaut"
                            class="btn btn-primary">
                             View Astronauts <i class="fa-solid fa-arrow-right ms-1"></i>
                         </a>
@@ -34,7 +34,7 @@
                         <p class="card-text">Discover the worlds we’ve visited.</p>
                     </div>
                     <div class="card-footer bg-transparent">
-                        <a href="${pageContext.request.contextPath}/planets" class="btn btn-primary">
+                        <a href="${pageContext.request.contextPath}/planet" class="btn btn-primary">
                             View Planets <i class="fa-solid fa-arrow-right ms-1"></i>
                         </a>
                     </div>
