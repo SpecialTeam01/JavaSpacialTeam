@@ -1,4 +1,5 @@
 -- Create database and use it
+
 CREATE DATABASE IF NOT EXISTS StellarOdyssey;
 USE StellarOdyssey;
 
