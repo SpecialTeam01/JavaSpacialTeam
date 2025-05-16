@@ -37,14 +37,15 @@
         <td><%= p.getName() %></td>
         <td><%= p.getDiameter() %></td>
         <td><%= p.getDiscoveryDate() %></td>
-        <td><%= p.isHasAtmosphere() ? "✔" : "✘" %></td>
+        <td><%= p.isHasAtmosphere() ? "<span class='text-success fw-bold'>&#10003;</span>"
+                : "<span class='text-danger fw-bold'>&#10007;</span>" %></td>
         <td class="text-center align-middle">
           <a href="<%= request.getContextPath() %>/planets?action=detail&id=<%= p.getPlanetId() %>"
-             class="btn btn-sm btn-primary"><i class="bi bi-eye-fill"></i> View</a>
+             class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-eye-fill"></i> View</a>
           <a href="<%= request.getContextPath() %>/planets?action=edit&id=<%= p.getPlanetId() %>"
-             class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
+             class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-pencil-square"></i> Edit</a>
           <a href="<%= request.getContextPath() %>/planets?action=delete&id=<%= p.getPlanetId() %>"
-             class="btn btn-sm btn-danger"
+             class="btn btn-sm btn-danger rounded-pill shadow-sm"
              onclick="return confirm('Delete this planet?');"><i class="bi bi-trash3-fill"></i> Delete</a>
         </td>
       </tr>

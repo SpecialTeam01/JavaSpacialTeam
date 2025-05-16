@@ -13,24 +13,26 @@
   List<Planet> planetList = (List<Planet>) request.getAttribute("planetList");
 %>
 
-<div class="container my-4">
-  <h2><%= edit ? "Edit Mission" : "New Mission" %></h2>
+<div class="container my-5" style="max-width: 600px;">
+  <h2 class="mb-4">
+    <i class="fa-solid fa-hammer"></i>
+    <%= edit ? "Edit Mission" : "New Mission" %></h2>
 
   <form method="post" action="<%= request.getContextPath() %>/mission">
     <% if (edit) { %>
-    <input type="hidden" name="missionId" value="<%= mission.getMissionId() %>"/>
+    <input type="hidden" name="missionId" class="form-control rounded-pill" value="<%= mission.getMissionId() %>"/>
     <% } %>
 
     <div class="mb-3">
       <label class="form-label" for="missionName">Mission Name</label>
       <input type="text" id="missionName" name="missionName"
-             class="form-control" required
+             class="form-control rounded-pill" required
              value="<%= edit ? mission.getMissionName() : "" %>"/>
     </div>
 
     <div class="mb-3">
       <label for="astronautId" class="form-label">Astronaut</label>
-      <select id="astronautId" name="astronautId" class="form-select" required>
+      <select id="astronautId" name="astronautId" class="form-select rounded-pill" required>
         <option value="">-- Select Astronaut --</option>
         <% for (Astronaut a : astronautList) { %>
         <option value="<%= a.getAstronautId() %>"
@@ -43,7 +45,7 @@
 
     <div class="mb-3">
       <label for="planetId" class="form-label">Planet</label>
-      <select id="planetId" name="planetId" class="form-select" required>
+      <select id="planetId" name="planetId" class="form-select rounded-pill" required>
         <option value="">-- Select Planet --</option>
         <% for (Planet p : planetList) { %>
         <option value="<%= p.getPlanetId() %>"
@@ -56,19 +58,19 @@
 
     <div class="mb-3">
       <label for="startDate" class="form-label">Start Date</label>
-      <input type="date" id="startDate" name="startDate" class="form-control" required
+      <input type="date" id="startDate" name="startDate" class="form-control rounded-pill" required
              value="<%= startValue %>"/>
     </div>
 
     <div class="mb-3">
       <label for="endDate" class="form-label">End Date</label>
-      <input type="date" id="endDate" name="endDate" class="form-control"
+      <input type="date" id="endDate" name="endDate" class="form-control rounded-pill"
              value="<%= endValue %>"/>
     </div>
 
     <div class="mb-3">
       <label for="status" class="form-label">Status</label>
-      <input type="text" id="status" name="status" class="form-control"
+      <input type="text" id="status" name="status" class="form-control rounded-pill"
              value="<%= edit ? mission.getStatus() : "" %>"/>
     </div>
 
