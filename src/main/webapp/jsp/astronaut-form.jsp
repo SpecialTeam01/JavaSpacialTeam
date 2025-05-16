@@ -43,6 +43,7 @@
              value="<%= edit ? astro.getNationality() : "" %>"/>
     </div>
 
+
     <div class="mb-3">
       <label for="missionsCompleted" class="form-label">
         Missions Completed
