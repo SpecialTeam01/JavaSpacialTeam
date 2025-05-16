@@ -1,10 +1,10 @@
 package servlet;
 
-import dao.AstronautDAO;
 import dao.MissionDAO;
+import dao.AstronautDAO;
 import dao.PlanetDAO;
-import model.Astronaut;
 import model.Mission;
+import model.Astronaut;
 import model.Planet;
 import utils.DBConnection;
 
@@ -16,7 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/missions")
+@WebServlet("/mission")
 public class MissionServlet extends HttpServlet {
     private MissionDAO missionDAO;
     private AstronautDAO astronautDAO;
@@ -27,9 +27,9 @@ public class MissionServlet extends HttpServlet {
         super.init();
         try {
             Connection conn = DBConnection.getConnection();
-            missionDAO   = new MissionDAO(conn);
+            missionDAO = new MissionDAO(conn);
             astronautDAO = new AstronautDAO(conn);
-            planetDAO    = new PlanetDAO(conn);
+            planetDAO = new PlanetDAO(conn);
         } catch (SQLException e) {
             throw new ServletException("Error al inicializar DAOs", e);
         }
@@ -66,26 +66,26 @@ public class MissionServlet extends HttpServlet {
 
     private void listMissions(HttpServletRequest req, HttpServletResponse resp)
             throws SQLException, ServletException, IOException {
-        List<Mission> list = missionDAO.getAllMissions();
-        req.setAttribute("missionList", list);
-        req.getRequestDispatcher("/mission-list.jsp").forward(req, resp);
+        List<Mission> missions = missionDAO.getAllMissions();
+        req.setAttribute("missionList", missions);
+        req.getRequestDispatcher("/jsp/mission-list.jsp").forward(req, resp);
     }
 
     private void showNewForm(HttpServletRequest req, HttpServletResponse resp)
-            throws SQLException, ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         req.setAttribute("astronautList", astronautDAO.getAllAstronauts());
-        req.setAttribute("planetList",    planetDAO.getAllPlanets());
-        req.getRequestDispatcher("/mission-form.jsp").forward(req, resp);
+        req.setAttribute("planetList", planetDAO.getAllPlanets());
+        req.getRequestDispatcher("/jsp/mission-form.jsp").forward(req, resp);
     }
 
     private void showEditForm(HttpServletRequest req, HttpServletResponse resp)
-            throws SQLException, ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(req.getParameter("id"));
-        Mission existing = missionDAO.getMissionById(id);
-        req.setAttribute("mission",       existing);
+        Mission mission = missionDAO.getMissionById(id);
+        req.setAttribute("mission", mission);
         req.setAttribute("astronautList", astronautDAO.getAllAstronauts());
-        req.setAttribute("planetList",    planetDAO.getAllPlanets());
-        req.getRequestDispatcher("/mission-form.jsp").forward(req, resp);
+        req.setAttribute("planetList", planetDAO.getAllPlanets());
+        req.getRequestDispatcher("/jsp/mission-form.jsp").forward(req, resp);
     }
 
     private void showDetail(HttpServletRequest req, HttpServletResponse resp)
@@ -93,14 +93,14 @@ public class MissionServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Mission mission = missionDAO.getMissionById(id);
         req.setAttribute("mission", mission);
-        req.getRequestDispatcher("/mission-detail.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/mission-detail.jsp").forward(req, resp);
     }
 
     private void deleteMission(HttpServletRequest req, HttpServletResponse resp)
             throws SQLException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         missionDAO.deleteMission(id);
-        resp.sendRedirect("missions");
+        resp.sendRedirect(req.getContextPath() + "/mission");
     }
 
     @Override
@@ -109,23 +109,28 @@ public class MissionServlet extends HttpServlet {
         int id = req.getParameter("missionId") != null && !req.getParameter("missionId").isEmpty()
                 ? Integer.parseInt(req.getParameter("missionId")) : 0;
         int astronautId = Integer.parseInt(req.getParameter("astronautId"));
-        int planetId    = Integer.parseInt(req.getParameter("planetId"));
+        int planetId = Integer.parseInt(req.getParameter("planetId"));
         String missionName = req.getParameter("missionName");
-        java.util.Date startDate = java.sql.Date.valueOf(req.getParameter("startDate"));
-        String endDateStr = req.getParameter("endDate");
-        java.util.Date endDate = (endDateStr != null && !endDateStr.isEmpty())
-                ? java.sql.Date.valueOf(endDateStr) : null;
-        String status      = req.getParameter("status");
+        String status = req.getParameter("status");
+        java.sql.Date startDate = java.sql.Date.valueOf(req.getParameter("startDate"));
+        java.sql.Date endDate = req.getParameter("endDate") != null && !req.getParameter("endDate").isEmpty()
+                ? java.sql.Date.valueOf(req.getParameter("endDate")) : null;
         String description = req.getParameter("description");
 
-        Astronaut astro = new Astronaut();
-        astro.setAstronautId(astronautId);
-        Planet planet = new Planet();
-        planet.setPlanetId(planetId);
+        Astronaut astronaut = null;
+        try {
+            astronaut = astronautDAO.getAstronautById(astronautId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        Planet planet = null;
+        try {
+            planet = planetDAO.getPlanetById(planetId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        Mission mission = new Mission(id, astro, planet,
-                missionName, startDate, endDate,
-                status, description);
+        Mission mission = new Mission(id, astronaut, planet, missionName, startDate, endDate, status, description);
 
         try {
             if (id == 0) {
@@ -136,6 +141,7 @@ public class MissionServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new ServletException("Error al guardar misión", e);
         }
-        resp.sendRedirect("missions");
+
+        resp.sendRedirect(req.getContextPath() + "/mission");
     }
 }
