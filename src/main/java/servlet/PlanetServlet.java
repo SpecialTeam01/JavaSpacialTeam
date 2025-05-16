@@ -61,12 +61,13 @@ public class PlanetServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         List<Planet> list = planetDAO.getAllPlanets();
         req.setAttribute("planetList", list);
-        req.getRequestDispatcher("/planet-list.jsp").forward(req, resp);
+        // Apuntamos al JSP dentro de /jsp/
+        req.getRequestDispatcher("/jsp/planet-list.jsp").forward(req, resp);
     }
 
     private void showNewForm(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/planet-form.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/planet-form.jsp").forward(req, resp);
     }
 
     private void showEditForm(HttpServletRequest req, HttpServletResponse resp)
@@ -74,7 +75,7 @@ public class PlanetServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Planet existing = planetDAO.getPlanetById(id);
         req.setAttribute("planet", existing);
-        req.getRequestDispatcher("/planet-form.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/planet-form.jsp").forward(req, resp);
     }
 
     private void showDetail(HttpServletRequest req, HttpServletResponse resp)
@@ -82,7 +83,7 @@ public class PlanetServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Planet planet = planetDAO.getPlanetById(id);
         req.setAttribute("planet", planet);
-        req.getRequestDispatcher("/planet-detail.jsp").forward(req, resp);
+        req.getRequestDispatcher("/jsp/planet-detail.jsp").forward(req, resp);
     }
 
     private void deletePlanet(HttpServletRequest req, HttpServletResponse resp)
