@@ -70,10 +70,13 @@ a, a:hover {
     color: var(--blue-claro) !important;
 }
 
-/* Pie de página */
 footer.footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important;
     background-color: var(--blue-oscuro) !important;
-    color:            var(--blue-claro)  !important;
+    color: var(--blue-claro) !important;
+    z-index: 1030 !important;
 }
 
 /* Efecto hover en tarjetas */

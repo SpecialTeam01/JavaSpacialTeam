@@ -7,7 +7,7 @@
   Astronaut astro = (Astronaut) request.getAttribute("astronaut");
 %>
 <div class="container my-4">
-  <h2>Astronaut Details</h2>
+  <h2> <i class="fa-solid fa-user-astronaut"></i> Astronaut Details</h2>
 
   <dl class="row mt-3">
     <dt class="col-sm-3">ID</dt>
@@ -31,8 +31,8 @@
     </dd>
   </dl>
 
-  <a href="<%= request.getContextPath() %>/astronauts"
-     class="btn btn-secondary">← Back to list</a>
+  <a href="<%= request.getContextPath() %>/astronaut"
+     class="btn btn-light">← Back to list</a>
 </div>
 
 <%@ include file="/includes/footer.jsp" %>
