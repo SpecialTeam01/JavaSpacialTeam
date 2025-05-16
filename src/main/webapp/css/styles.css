@@ -70,6 +70,23 @@ a, a:hover {
     color: var(--blue-claro) !important;
 }
 
+/* Estado de las misiones */
+.status-completed {
+    color: #28a745 !important; /* verde */
+    font-weight: bold;
+}
+
+.status-inprogress {
+    color: #ffc107 !important; /* amarillo */
+    font-weight: bold;
+}
+
+.status-delayed {
+    color: #dc3545 !important; /* rojo, opcional si hay más estados */
+    font-weight: bold;
+}
+
+/* Pie de pagina */
 footer.footer {
     position: fixed !important;
     bottom: 0 !important;
@@ -85,3 +102,23 @@ footer.footer {
     box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
     transition: all 0.3s ease;
 }
+
+/* MediaQueries para adaptar las tablas a pantallas pequeñas */
+@media (max-width: 576px) {
+    .table th,
+    .table td {
+        padding: 0.5rem !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap !important;
+    }
+
+    .btn-sm {
+        font-size: 0.75rem !important;
+        padding: 0.25rem 0.4rem !important;
+    }
+
+    h2 {
+        font-size: 1.3rem !important;
+    }
+}
+

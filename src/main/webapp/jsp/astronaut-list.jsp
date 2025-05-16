@@ -3,7 +3,7 @@
 <%@ include file="/includes/header.jsp" %>
 
 <div class="container my-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>
             <i class="fa-solid fa-user-astronaut"></i> Astronauts
         </h2>
@@ -12,8 +12,6 @@
             <i class="bi bi-plus-circle"></i>  New Astronaut
         </a>
     </div>
-
-    <div class="table-responsive">
 
             <div class="table-responsive">
                 <table class="table table-dark table-hover table-bordered align-middle mb-0 rounded">
@@ -62,7 +60,6 @@
                     </tbody>
                 </table>
             </div>
-    </div>
 </div>
 
 <%@ include file="/includes/footer.jsp" %>

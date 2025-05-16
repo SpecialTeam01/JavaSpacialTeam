@@ -3,14 +3,18 @@
   User: S1-PC63
   Date: 16/05/2025
   Time: 12:56
-  To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 </div>
 </main>
 
-<footer class="footer py-3 text-center bg-light">
+<footer class="footer py-3 text-center">
   <div class="container">
-    <span class="text-light">2025 Stellar Odisey - The Dark Side</span>
+    <span>
+      © 2025 <strong>Stellar Odyssey</strong> — The Dark Side |
+      <a href="https://github.com/SpecialTeam01/JavaSpacialTeam" class="footer-link" target="_blank">GitHub</a> ·
+      <a href="#" class="footer-link">Terms</a>
+    </span>
   </div>
 </footer>
 
@@ -29,6 +33,18 @@
     background-color: var(--blue-oscuro) !important;
     color: var(--blue-claro) !important;
     z-index: 1030 !important;
+    font-size: 0.9rem;
+    border-top: 1px solid #1f2a36;
+  }
+
+  .footer-link {
+    color: var(--blue-claro);
+    text-decoration: none;
+    margin: 0 5px;
+  }
+
+  .footer-link:hover {
+    text-decoration: underline;
   }
 
   body {
