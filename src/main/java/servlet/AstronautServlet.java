@@ -20,7 +20,6 @@ public class AstronautServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         try {
-            // Conexion a la base de datos
             Connection conn = DBConnection.getConnection();
             astronautDAO = new AstronautDAO(conn);
         } catch (SQLException e) {
@@ -29,7 +28,8 @@ public class AstronautServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action == null) action = "list";
 
@@ -44,12 +44,15 @@ public class AstronautServlet extends HttpServlet {
                 case "delete":
                     deleteAstronaut(req, resp);
                     break;
+                case "detail":
+                    showDetail(req, resp);
+                    break;
                 default:
                     listAstronauts(req, resp);
                     break;
             }
         } catch (SQLException ex) {
-            throw new ServletException(ex);
+            throw new ServletException("Error en operación con la base de datos", ex);
         }
     }
 
@@ -73,6 +76,14 @@ public class AstronautServlet extends HttpServlet {
         req.getRequestDispatcher("/astronaut-form.jsp").forward(req, resp);
     }
 
+    private void showDetail(HttpServletRequest req, HttpServletResponse resp)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        Astronaut astronaut = astronautDAO.getAstronautById(id);
+        req.setAttribute("astronaut", astronaut);
+        req.getRequestDispatcher("/astronaut-detail.jsp").forward(req, resp);
+    }
+
     private void deleteAstronaut(HttpServletRequest req, HttpServletResponse resp)
             throws SQLException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
@@ -81,7 +92,8 @@ public class AstronautServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         int id = req.getParameter("astronautId") != null && !req.getParameter("astronautId").isEmpty()
                 ? Integer.parseInt(req.getParameter("astronautId")) : 0;
         String name = req.getParameter("name");
@@ -99,7 +111,7 @@ public class AstronautServlet extends HttpServlet {
                 astronautDAO.updateAstronaut(astro);
             }
         } catch (SQLException e) {
-            throw new ServletException(e);
+            throw new ServletException("Error al guardar astronauta", e);
         }
 
         resp.sendRedirect("astronauts");

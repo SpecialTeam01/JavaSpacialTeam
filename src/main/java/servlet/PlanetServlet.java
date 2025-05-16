@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -22,7 +21,6 @@ public class PlanetServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         try {
-            // Obtengo la conexión a través de tu clase utilitaria
             Connection conn = DBConnection.getConnection();
             planetDAO = new PlanetDAO(conn);
         } catch (SQLException e) {
@@ -31,7 +29,8 @@ public class PlanetServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action == null) action = "list";
 
@@ -46,12 +45,15 @@ public class PlanetServlet extends HttpServlet {
                 case "delete":
                     deletePlanet(req, resp);
                     break;
+                case "detail":
+                    showDetail(req, resp);
+                    break;
                 default:
                     listPlanets(req, resp);
                     break;
             }
         } catch (SQLException ex) {
-            throw new ServletException(ex);
+            throw new ServletException("Error en operación con la base de datos", ex);
         }
     }
 
@@ -75,6 +77,14 @@ public class PlanetServlet extends HttpServlet {
         req.getRequestDispatcher("/planet-form.jsp").forward(req, resp);
     }
 
+    private void showDetail(HttpServletRequest req, HttpServletResponse resp)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        Planet planet = planetDAO.getPlanetById(id);
+        req.setAttribute("planet", planet);
+        req.getRequestDispatcher("/planet-detail.jsp").forward(req, resp);
+    }
+
     private void deletePlanet(HttpServletRequest req, HttpServletResponse resp)
             throws SQLException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
@@ -83,7 +93,8 @@ public class PlanetServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         int id = req.getParameter("planetId") != null && !req.getParameter("planetId").isEmpty()
                 ? Integer.parseInt(req.getParameter("planetId")) : 0;
         String name = req.getParameter("name");
@@ -113,7 +124,7 @@ public class PlanetServlet extends HttpServlet {
                 planetDAO.updatePlanet(planet);
             }
         } catch (SQLException e) {
-            throw new ServletException(e);
+            throw new ServletException("Error al guardar planeta", e);
         }
 
         resp.sendRedirect("planets");
