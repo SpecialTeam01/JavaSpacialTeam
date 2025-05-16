@@ -44,7 +44,7 @@
 
   </dependencies>
 
-  <build>
+    <build>
     <finalName>StellarOdisey</finalName>
     <pluginManagement>
       <plugins>
@@ -54,22 +54,20 @@
           <version>3.2.2</version>
         </plugin>
 
-
-        <plugin>
-          <!--
+        <!--
           mvn tomcat7:deploy para desplegar
           mvn tomcat7:undeploy para replegar
           mvn tomcat7:redeploy para redesplegar
-          mvn tomcat7:run para arrancar el proyecto
-          -->
+       -->
+
+        <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>2.2</version>
-
           <configuration>
             <url>http://localhost:8080/manager/text</url>
-            <server>tomcat9</server>
-            <path>/StellarOdyssey</path>
+            <port>8080</port>
+            <path>/StellarOdissey</path>
             <username>tomcat</username>
             <password>tomcat</password>
           </configuration>
@@ -77,5 +75,6 @@
       </plugins>
     </pluginManagement>
   </build>
+
 
 </project>
