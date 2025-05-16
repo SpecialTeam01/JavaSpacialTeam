@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/planet">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/planets">
                         <i class="fa-solid fa-globe"></i> Planets
                     </a>
                 </li>

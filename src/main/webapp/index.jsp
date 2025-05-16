@@ -34,7 +34,7 @@
                         <p class="card-text">Discover the worlds we’ve visited.</p>
                     </div>
                     <div class="card-footer bg-transparent">
-                        <a href="${pageContext.request.contextPath}/planet" class="btn btn-primary">
+                        <a href="${pageContext.request.contextPath}/planets" class="btn btn-primary">
                             View Planets <i class="fa-solid fa-arrow-right ms-1"></i>
                         </a>
                     </div>
@@ -49,7 +49,7 @@
                         <p class="card-text">Browse the history of our expeditions.</p>
                     </div>
                     <div class="card-footer bg-transparent">
-                        <a href="${pageContext.request.contextPath}/missions"
+                        <a href="${pageContext.request.contextPath}/mission"
                            class="btn btn-primary">
                             View Missions <i class="fa-solid fa-arrow-right ms-1"></i>
                         </a>
