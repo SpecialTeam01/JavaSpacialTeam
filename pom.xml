@@ -44,7 +44,7 @@
 
   </dependencies>
 
-  <build>
+    <build>
     <finalName>StellarOdisey</finalName>
     <pluginManagement>
       <plugins>
@@ -58,8 +58,7 @@
           mvn tomcat7:deploy para desplegar
           mvn tomcat7:undeploy para replegar
           mvn tomcat7:redeploy para redesplegar
-          mvn tomcat7:run para arrancar todo
-        -->
+       -->
 
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
@@ -68,7 +67,7 @@
           <configuration>
             <url>http://localhost:8080/manager/text</url>
             <port>8080</port>
-            <path>/OdiseaEstelar</path>
+            <path>/StellarOdissey</path>
             <username>tomcat</username>
             <password>tomcat</password>
           </configuration>
