@@ -1,0 +1,43 @@
+# Archivos de construcción de Maven
+/target/
+
+# Archivos de configuración del entorno de desarrollo
+/.idea/
+/*.iml
+/.classpath
+/.project
+/.settings/
+
+# Logs
+*.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.swp
+
+# Archivos de compilación
+*.class
+
+# Archivos generados por test
+/test-output/
+/surefire-reports/
+
+# Archivos de configuración de OS
+ehthumbs.db
+Desktop.ini
+
+# Archivos de bases de datos locales
+*.h2.db
+*.mv.db
+
+# Archivos SQL temporales
+*.sql~
+
+# Archivos de empaquetado
+*.war
+*.ear
+*.jar
