@@ -1,4 +1,11 @@
-C:\Users\S2-PC00\IdeaProjects\JavaSpacialTeam\src\main\java\utils\DBConnection.java
-C:\Users\S2-PC00\IdeaProjects\JavaSpacialTeam\src\main\java\dao\AstronautDao.java
-C:\Users\S2-PC00\IdeaProjects\JavaSpacialTeam\src\main\java\model\AstronautModel.java
-C:\Users\S2-PC00\IdeaProjects\JavaSpacialTeam\src\main\java\servlet\AstronautServlet.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\dao\MissionDAO.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\model\Planet.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\servlet\AstronautServlet.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\utils\DBConnection.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\servlet\HomeServlet.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\servlet\PlanetServlet.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\dao\AstronautDAO.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\model\Mission.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\dao\PlanetDAO.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\model\Astronaut.java
+D:\Proyecto\JavaSpacialTeam\src\main\java\servlet\MissionServlet.java

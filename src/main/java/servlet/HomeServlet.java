@@ -16,7 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet({"/", "/index"})
+@WebServlet("/index")
 public class HomeServlet extends HttpServlet {
     private AstronautDAO astronautDAO;
     private PlanetDAO    planetDAO;

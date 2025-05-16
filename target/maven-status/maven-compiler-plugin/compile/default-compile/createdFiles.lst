@@ -1,3 +1,11 @@
-model\AstronautModel.class
-servlet\AstronautServlet.class
+dao\MissionDAO.class
+model\Planet.class
+servlet\HomeServlet.class
 utils\DBConnection.class
+dao\AstronautDAO.class
+dao\PlanetDAO.class
+servlet\MissionServlet.class
+model\Mission.class
+servlet\AstronautServlet.class
+servlet\PlanetServlet.class
+model\Astronaut.class
