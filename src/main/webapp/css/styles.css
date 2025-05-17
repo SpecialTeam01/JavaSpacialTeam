@@ -1,7 +1,7 @@
 :root {
-    --blue-claro:       #3790E6;  /* rgb(55,144,230) */
+    --blue-claro:       #a9d6e5;  /* rgb(55,144,230) */
     --blue-medio:       #316AA1;  /* rgb(49,106,161) */
-    --blue-oscuro:      #2A4D6E;  /* rgb(42, 77,110) */
+    --blue-oscuro:      #0d1b2a;  /* rgb(42, 77,110) */
     --blue-casi-negro:  #1B2C3C;  /* rgb(27, 44, 60) */
     --blue-intenso:     #080C0F;  /* rgb( 8, 12, 15) */
 }
@@ -103,7 +103,7 @@ footer.footer {
     width: 100% !important;
     background-color: var(--blue-oscuro) !important;
     color: var(--blue-claro) !important;
-    z-index: 1030 !important;
+    /*z-index: 1030 !important;*/
 }
 
 /* Efecto hover en tarjetas */
