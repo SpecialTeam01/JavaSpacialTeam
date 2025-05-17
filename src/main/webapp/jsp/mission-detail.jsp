@@ -35,7 +35,7 @@
         <dd class="col-sm-9"><%= m.getAstronaut().getName() %></dd>
     </dl>
 
-    <a href="<%= request.getContextPath() %>/missions"
+    <a href="<%= request.getContextPath() %>/mission"
        class="btn btn-secondary">← Back to list</a>
 </div>
 

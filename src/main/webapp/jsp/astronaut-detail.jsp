@@ -12,7 +12,7 @@
 
 <div class="row mt-3 align-items-start">
   <!-- Columna izquierda: Detalles -->
-  <div class="col-md-7">
+  <div class="col-md-7" style="padding-left: 300px">
     <dl class="row">
       <dt class="col-sm-4">ID</dt>
       <dd class="col-sm-8"><%= astro.getAstronautId() %></dd>

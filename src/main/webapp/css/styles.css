@@ -6,13 +6,17 @@
     --blue-intenso:     #080C0F;  /* rgb( 8, 12, 15) */
 }
 
-/* Fondo y texto global */
 html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     background-image: url("../images/fondomision.png");
-    /*filter: blur(2px);*/
-    z-index: -1;
+    background-size: cover;             /* Cubre toda la pantalla sin márgenes */
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-attachment: fixed;
     background-color: transparent !important;
-    color:            var(--blue-claro)  !important;
+    color: var(--blue-claro) !important;
 }
 
 /* Cabecera / Navbar */
