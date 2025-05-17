@@ -7,7 +7,7 @@
   // Recibimos el nombre de fichero que pasó el servlet
   String imgFile    = (String) request.getAttribute("imageFile");
   String imgPath    = request.getContextPath() + "/images/" + imgFile;
-  String defaultImg = request.getContextPath() + "/images/default.png";
+  String defaultImg = request.getContextPath() + "/images/defautuser.jpg";
 %>
 <div class="container my-4">
   <h2>Astronaut Details</h2>

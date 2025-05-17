@@ -53,11 +53,14 @@
           <%= m.getStatus() %>
         </td>
         <td class="text-center align-middle">
-          <a href="${pageContext.request.contextPath}/mission?action=detail&id=<%= m.getMissionId() %>" class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-eye"></i> View</a>
+          <a href="${pageContext.request.contextPath}/mission?action=detail&id=<%= m.getMissionId() %>"
+             class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-eye"></i> View</a>
         </td>
         <td class="text-center align-middle">
-          <a href="${pageContext.request.contextPath}/mission?action=edit&id=<%= m.getMissionId() %>" class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-pencil"></i> Edit</a>
-          <a href="${pageContext.request.contextPath}/mission?action=delete&id=<%= m.getMissionId() %>" class="btn btn-sm btn-danger rounded-pill shadow-sm" onclick="return confirm('Delete this mission?');"><i class="bi bi-trash"></i> Delete</a>
+          <a href="${pageContext.request.contextPath}/mission?action=edit&id=<%= m.getMissionId() %>"
+             class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-pencil"></i> Edit</a>
+          <a href="${pageContext.request.contextPath}/mission?action=delete&id=<%= m.getMissionId() %>"
+             class="btn btn-sm btn-danger rounded-pill shadow-sm" onclick="return confirm('Delete this mission?');"><i class="bi bi-trash"></i> Delete</a>
         </td>
       </tr>
       <%   }
