@@ -72,8 +72,8 @@
     if (totalPages > 1) {
   %>
   <div class="d-flex justify-content-center my-3">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
+    <nav aria-label="Page navigation" class="pagination-container">
+      <ul class="pagination custom-pagination">
         <% if (currentPage > 1) { %>
         <li class="page-item">
           <a class="page-link" href="?page=<%= currentPage - 1 %>">« Anterior</a>
@@ -93,6 +93,7 @@
         <% } %>
       </ul>
     </nav>
+
   </div>
   <%
     }
