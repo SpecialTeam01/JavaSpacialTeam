@@ -1,11 +1,15 @@
-<!-- File: src/main/webapp/jsp/astronaut-detail.jsp -->
 <%@ page contentType="text/html; charset=UTF-8" language="java"
          import="model.Astronaut" %>
 <%@ include file="/includes/header.jsp" %>
 
 <%
   Astronaut astro = (Astronaut) request.getAttribute("astronaut");
+  // Recibimos el nombre de fichero que pasó el servlet
+  String imgFile    = (String) request.getAttribute("imageFile");
+  String imgPath    = request.getContextPath() + "/images/" + imgFile;
+  String defaultImg = request.getContextPath() + "/images/default.png";
 %>
+
 <div class="row mt-3 align-items-start">
   <!-- Columna izquierda: Detalles -->
   <div class="col-md-7">
@@ -33,10 +37,11 @@
 
   <!-- Columna derecha: Imagen -->
   <div class="col-md-5 text-center">
-    <img src="<%= request.getContextPath() %>/images/astronauts/1.png"
-         alt="Astronaut photo"
+    <img src="<%= imgPath %>"
+         alt="Photo of <%= astro.getName() %>"
          class="img-fluid rounded shadow"
-         style="max-height: 300px;">
+         style="max-height: 300px;"
+         onerror="this.onerror=null; this.src='<%= defaultImg %>';">
   </div>
 </div>
 

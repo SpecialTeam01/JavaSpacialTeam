@@ -10,11 +10,25 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/astronaut")
 public class AstronautServlet extends HttpServlet {
     private AstronautDAO astronautDAO;
+
+    // mapeo de astronautId para asignarle una imagen png
+    private static final Map<Integer, String> IMAGE_MAP = new HashMap<>();
+    static {
+        IMAGE_MAP.put(1, "nerea.png");
+        IMAGE_MAP.put(2, "miguel.png");
+        IMAGE_MAP.put(3, "kenny.png");
+        IMAGE_MAP.put(4, "vanessa.png");
+        IMAGE_MAP.put(5, "angel.png");
+        IMAGE_MAP.put(6, "santiago.png");
+
+    }
 
     @Override
     public void init() throws ServletException {
@@ -60,7 +74,6 @@ public class AstronautServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         List<Astronaut> list = astronautDAO.getAllAstronauts();
         req.setAttribute("astronautList", list);
-        // Ahora apunta a la carpeta /jsp/
         req.getRequestDispatcher("/jsp/astronaut-list.jsp").forward(req, resp);
     }
 
@@ -81,6 +94,11 @@ public class AstronautServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Astronaut astronaut = astronautDAO.getAstronautById(id);
+
+        // ===> AÑADIDO: determinamos el fichero de imagen correspondiente
+        String imageFile = IMAGE_MAP.getOrDefault(id, "default.png");
+        req.setAttribute("imageFile", imageFile);
+
         req.setAttribute("astronaut", astronaut);
         req.getRequestDispatcher("/jsp/astronaut-detail.jsp").forward(req, resp);
     }
@@ -89,7 +107,6 @@ public class AstronautServlet extends HttpServlet {
             throws SQLException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         astronautDAO.deleteAstronaut(id);
-        // Redirige de nuevo al servlet, que listará desde /jsp/astronaut-list.jsp
         resp.sendRedirect("astronaut");
     }
 
