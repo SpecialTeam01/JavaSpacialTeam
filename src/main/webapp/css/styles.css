@@ -1,15 +1,21 @@
 :root {
-    --blue-claro:       #3790E6;  /* rgb(55,144,230) */
+    --blue-claro:       #a9d6e5;  /* rgb(55,144,230) */
     --blue-medio:       #316AA1;  /* rgb(49,106,161) */
-    --blue-oscuro:      #2A4D6E;  /* rgb(42, 77,110) */
+    --blue-oscuro:      #0d1b2a;  /* rgb(42, 77,110) */
     --blue-casi-negro:  #1B2C3C;  /* rgb(27, 44, 60) */
     --blue-intenso:     #080C0F;  /* rgb( 8, 12, 15) */
+    --amarillo:         #ffc107;
+    --rojo:             #dc3545;
+    --verde:            #28a745;
+    --blanco:           #ffffff;
+    --negro:            #000000;
 }
 
 html, body {
-    height: 100%;
+    min-height: 100%;           /* antes: height: 100%; */
     margin: 0;
     padding: 0;
+    padding-bottom: 4rem;       /* espacio inferior = altura aprox. del footer */
     background-image: url("../images/fondomision.png");
     background-size: cover;             /* Cubre toda la pantalla sin márgenes */
     background-repeat: no-repeat;
@@ -74,7 +80,6 @@ html, body {
     background-color: var(--blue-oscuro) !important;
 }
 
-
 /* Enlaces */
 a, a:hover {
     color: var(--blue-claro) !important;
@@ -82,21 +87,19 @@ a, a:hover {
 
 /* Estado de las misiones */
 .status-completed {
-    color: #28a745 !important; /* verde */
+    color: var(--verde) !important; /* verde */
     font-weight: bold;
 }
-
 .status-inprogress {
-    color: #ffc107 !important; /* amarillo */
+    color: var(--amarillo) !important; /* amarillo */
     font-weight: bold;
 }
-
 .status-delayed {
-    color: #dc3545 !important; /* rojo, opcional si hay más estados */
+    color: var(--rojo) !important; /* rojo */
     font-weight: bold;
 }
 
-/* Pie de pagina */
+/* Pie de página fijo */
 footer.footer {
     position: fixed !important;
     bottom: 0 !important;
@@ -113,13 +116,12 @@ footer.footer {
     transition: all 0.3s ease;
 }
 
-/* Estilos personalizados para los botones de paginacion */
+/* Estilos personalizados para los botones de paginación */
 .pagination-container {
     display: flex;
     justify-content: center;
     margin: 2rem 0;
 }
-
 .custom-pagination {
     display: flex;
     list-style: none;
@@ -129,33 +131,28 @@ footer.footer {
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-
 .custom-pagination .page-item {
     margin: 0;
 }
-
 .custom-pagination .page-link {
     display: block;
     padding: 0.5rem 1rem;
-    color: #ffffff;
+    color: var(--blanco);
     text-decoration: none;
     background-color: transparent;
     border: none;
     transition: all 0.2s ease-in-out;
 }
-
 .custom-pagination .page-link:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    color: white;
+    color: var(--blanco);
 }
-
 .custom-pagination .page-item.active .page-link {
     background-color: var(--blue-oscuro);
-    color: #000000;
+    color: var(--negro);
     font-weight: bold;
     pointer-events: none;
 }
-
 
 /* MediaQueries para adaptar las tablas a pantallas pequeñas */
 @media (max-width: 576px) {
@@ -175,4 +172,3 @@ footer.footer {
         font-size: 1.3rem !important;
     }
 }
-
