@@ -21,7 +21,8 @@ name VARCHAR(100) NOT NULL UNIQUE,
 diameter INT,
 discovery_date DATE,
 has_atmosphere BOOLEAN DEFAULT FALSE,
-description TEXT
+description TEXT,
+image VARCHAR(100)
 );
 
 -- MISSIONS (Astronauts-Planets relationship)
@@ -39,7 +40,7 @@ FOREIGN KEY (planet_id) REFERENCES Planets(planet_id) ON DELETE CASCADE
 );
 
 -- Data for astronauts
-INSERT INTO Astronauts (name, birth_date, nationality, missions_completed, active, image) VALUES
+INSERT INTO Astronauts (name, birth_date, nationality, missions_completed, active) VALUES
 ('Nerea Tomas', '1997-10-31', 'Spain', 5, TRUE, 'nerea.png'),
 ('Miguel Chavarria', '1998-06-22', 'Spain', 3, TRUE, 'miguel.png'),
 ('Kenny Pineda', '1995-01-31', 'Spain', 2, TRUE, 'kenny.png'),
@@ -48,7 +49,7 @@ INSERT INTO Astronauts (name, birth_date, nationality, missions_completed, activ
 ('Santiago Faci', '1995-01-31', 'Spain', 2, TRUE, 'santiago.png');
 
 -- Data for Planets
-INSERT INTO Planets (name, diameter, discovery_date, has_atmosphere, description) VALUES
+INSERT INTO Planets (name, diameter, discovery_date, has_atmosphere, description, image) VALUES
 ('Mars', 6779, '1659-07-13', FALSE, 'Fourth planet in the Solar System'),
 ('Europa', 3122, '1610-01-08', FALSE, 'Jupiter moon with potential subsurface ocean'),
 ('Titan', 5150, '1655-03-25', TRUE, 'Saturn moon with methane lakes'),

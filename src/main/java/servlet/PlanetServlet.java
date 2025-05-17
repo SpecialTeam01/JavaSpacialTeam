@@ -10,12 +10,23 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/planets")
 public class PlanetServlet extends HttpServlet {
     private PlanetDAO planetDAO;
+
+    //Mapeo de planetId Nombre de fichero de imagen
+    private static final Map<Integer, String> IMAGE_MAP = new HashMap<>();
+    static {
+        IMAGE_MAP.put(1, "mars.png");
+        IMAGE_MAP.put(2, "europa.png");
+        IMAGE_MAP.put(3, "titan.png");
+        IMAGE_MAP.put(4, "Kepler-186f.png");
+        IMAGE_MAP.put(5, "Proxima-Centauri-b.png");
+    }
 
     @Override
     public void init() throws ServletException {
@@ -61,7 +72,6 @@ public class PlanetServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         List<Planet> list = planetDAO.getAllPlanets();
         req.setAttribute("planetList", list);
-        // Apuntamos al JSP dentro de /jsp/
         req.getRequestDispatcher("/jsp/planet-list.jsp").forward(req, resp);
     }
 
@@ -82,6 +92,11 @@ public class PlanetServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Planet planet = planetDAO.getPlanetById(id);
+
+        // ===> AÑADIDO: determinamos el fichero de imagen
+        String imageFile = IMAGE_MAP.getOrDefault(id, "default.png");
+        req.setAttribute("imageFile", imageFile);
+
         req.setAttribute("planet", planet);
         req.getRequestDispatcher("/jsp/planet-detail.jsp").forward(req, resp);
     }
@@ -90,7 +105,7 @@ public class PlanetServlet extends HttpServlet {
             throws SQLException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         planetDAO.deletePlanet(id);
-        resp.sendRedirect("planets");
+        resp.sendRedirect(req.getContextPath() + "/planets");
     }
 
     @Override
@@ -99,35 +114,33 @@ public class PlanetServlet extends HttpServlet {
         int id = req.getParameter("planetId") != null && !req.getParameter("planetId").isEmpty()
                 ? Integer.parseInt(req.getParameter("planetId")) : 0;
         String name = req.getParameter("name");
-
         Integer diameter = null;
-        String diameterParam = req.getParameter("diameter");
-        if (diameterParam != null && !diameterParam.isEmpty()) {
-            diameter = Integer.parseInt(diameterParam);
+        String diamParam = req.getParameter("diameter");
+        if (diamParam != null && !diamParam.isEmpty()) {
+            diameter = Integer.parseInt(diamParam);
         }
-
-        LocalDate discoveryDate = LocalDate.parse(req.getParameter("discoveryDate"));
+        java.sql.Date discoveryDate = java.sql.Date.valueOf(req.getParameter("discoveryDate"));
         boolean hasAtmosphere = "on".equals(req.getParameter("hasAtmosphere"));
         String description = req.getParameter("description");
 
-        Planet planet = new Planet();
-        planet.setPlanetId(id);
-        planet.setName(name);
-        planet.setDiameter(diameter);
-        planet.setDiscoveryDate(discoveryDate);
-        planet.setHasAtmosphere(hasAtmosphere);
-        planet.setDescription(description);
+        Planet p = new Planet();
+        p.setPlanetId(id);
+        p.setName(name);
+        p.setDiameter(diameter);
+        p.setDiscoveryDate(discoveryDate.toLocalDate());
+        p.setHasAtmosphere(hasAtmosphere);
+        p.setDescription(description);
 
         try {
             if (id == 0) {
-                planetDAO.insertPlanet(planet);
+                planetDAO.insertPlanet(p);
             } else {
-                planetDAO.updatePlanet(planet);
+                planetDAO.updatePlanet(p);
             }
         } catch (SQLException e) {
             throw new ServletException("Error al guardar planeta", e);
         }
 
-        resp.sendRedirect("planets");
+        resp.sendRedirect(req.getContextPath() + "/planets");
     }
 }
