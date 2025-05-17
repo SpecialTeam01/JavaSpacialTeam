@@ -1,0 +1,24 @@
+.astronaut-container {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.astronaut {
+    position: absolute;
+    width: 350px;
+    height: auto;
+    top: 50%;
+    /* Rotacion */
+    transform: translateY(-50%) rotate(-30deg);
+    /* Velocidad */
+    animation: fly-back 5s linear infinite;
+}
+
+@keyframes fly-back {
+    from { left: 100%; }
+    to   { left: -150px; }
+}

@@ -14,6 +14,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet("/mission")
@@ -66,8 +67,37 @@ public class MissionServlet extends HttpServlet {
 
     private void listMissions(HttpServletRequest req, HttpServletResponse resp)
             throws SQLException, ServletException, IOException {
-        List<Mission> missions = missionDAO.getAllMissions();
-        req.setAttribute("missionList", missions);
+        // Paginacion
+        int page = 1;
+        int recordsPerPage = 5;
+        String pageParam = req.getParameter("page");
+        if (pageParam != null) {
+            try {
+                page = Integer.parseInt(pageParam);
+                if (page < 1) page = 1;
+            } catch (NumberFormatException e) {
+                page = 1;
+            }
+        }
+
+        List<Mission> allMissions = missionDAO.getAllMissions();
+        int totalRecords = allMissions.size();
+
+        int start = (page - 1) * recordsPerPage;
+        int end = Math.min(start + recordsPerPage, totalRecords);
+        List<Mission> missionsPage;
+        if (start >= totalRecords) {
+            missionsPage = Collections.emptyList();
+        } else {
+            missionsPage = allMissions.subList(start, end);
+        }
+
+        int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+
+        req.setAttribute("missionList", missionsPage);
+        req.setAttribute("currentPage", page);
+        req.setAttribute("totalPages", totalPages);
+
         req.getRequestDispatcher("/jsp/mission-list.jsp").forward(req, resp);
     }
 

@@ -21,6 +21,10 @@
 
     <!-- Enlace a estilos personalizados de Bootstrap -->
     <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
+
+    <!-- LOTTIE - animacion -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
