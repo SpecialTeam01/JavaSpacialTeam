@@ -9,10 +9,11 @@
   String imgPath    = request.getContextPath() + "/images/" + imgFile;
   String defaultImg = request.getContextPath() + "/images/default.png";
 %>
-
+<div class="container my-4">
+  <h2>Astronaut Details</h2>
 <div class="row mt-3 align-items-start">
   <!-- Columna izquierda: Detalles -->
-  <div class="col-md-7" style="padding-left: 300px">
+  <div class="col-md-7">
     <dl class="row">
       <dt class="col-sm-4">ID</dt>
       <dd class="col-sm-8"><%= astro.getAstronautId() %></dd>
@@ -43,6 +44,7 @@
          style="max-height: 300px;"
          onerror="this.onerror=null; this.src='<%= defaultImg %>';">
   </div>
+</div>
 </div>
 
 <%@ include file="/includes/footer.jsp" %>
