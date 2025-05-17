@@ -101,4 +101,19 @@ public class PlanetDAO {
         p.setDescription(rs.getString("description"));
         return p;
     }
+
+    // BUSCADOR
+    public List<Planet> searchByName(String keyword) throws SQLException {
+        List<Planet> planets = new ArrayList<>();
+        String sql = "SELECT * FROM Planets WHERE name LIKE ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + keyword + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    planets.add(mapRowToPlanet(rs));
+                }
+            }
+        }
+        return planets;
+    }
 }

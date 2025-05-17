@@ -1,7 +1,7 @@
 package dao;
 
-import model.Astronaut;
 import model.Mission;
+import model.Astronaut;
 import model.Planet;
 
 import java.sql.*;
@@ -15,39 +15,24 @@ public class MissionDAO {
         this.conn = conn;
     }
 
-    // Listar todas las misiones con su astronauta y planeta
+    // Obtener todas las misiones
     public List<Mission> getAllMissions() throws SQLException {
         List<Mission> missions = new ArrayList<>();
-        String sql =
-                "SELECT m.mission_id, m.mission_name, m.start_date, m.end_date, m.status, m.description, " +
-                        " a.astronaut_id AS a_id, a.name AS a_name, a.birth_date AS a_birth_date, " +
-                        " a.nationality AS a_nationality, a.missions_completed AS a_missions_completed, a.active AS a_active, " +
-                        " p.planet_id AS p_id, p.name AS p_name, p.diameter AS p_diameter, " +
-                        " p.discovery_date AS p_discovery_date, p.has_atmosphere AS p_has_atmosphere, p.description AS p_description " +
-                        "FROM Missions m " +
-                        "JOIN Astronauts a ON m.astronaut_id = a.astronaut_id " +
-                        "JOIN Planets   p ON m.planet_id   = p.planet_id";
+        String sql = "SELECT * FROM Missions";
+
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 missions.add(mapRowToMission(rs));
             }
         }
+
         return missions;
     }
 
-    // Obtener una misión por ID
+    // Obtener misión por ID
     public Mission getMissionById(int id) throws SQLException {
-        String sql =
-                "SELECT m.mission_id, m.mission_name, m.start_date, m.end_date, m.status, m.description, " +
-                        " a.astronaut_id AS a_id, a.name AS a_name, a.birth_date AS a_birth_date, " +
-                        " a.nationality AS a_nationality, a.missions_completed AS a_missions_completed, a.active AS a_active, " +
-                        " p.planet_id AS p_id, p.name AS p_name, p.diameter AS p_diameter, " +
-                        " p.discovery_date AS p_discovery_date, p.has_atmosphere AS p_has_atmosphere, p.description AS p_description " +
-                        "FROM Missions m " +
-                        "JOIN Astronauts a ON m.astronaut_id = a.astronaut_id " +
-                        "JOIN Planets   p ON m.planet_id   = p.planet_id " +
-                        "WHERE m.mission_id = ?";
+        String sql = "SELECT * FROM Missions WHERE mission_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -61,9 +46,7 @@ public class MissionDAO {
 
     // Insertar nueva misión
     public void insertMission(Mission mission) throws SQLException {
-        String sql = "INSERT INTO Missions " +
-                "(astronaut_id, planet_id, mission_name, start_date, end_date, status, description) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Missions (astronaut_id, planet_id, mission_name, start_date, end_date, status, description) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, mission.getAstronaut().getAstronautId());
             stmt.setInt(2, mission.getPlanet().getPlanetId());
@@ -80,12 +63,9 @@ public class MissionDAO {
         }
     }
 
-    // Actualizar una misión existente
+    // Actualizar misión existente
     public void updateMission(Mission mission) throws SQLException {
-        String sql = "UPDATE Missions SET " +
-                "astronaut_id = ?, planet_id = ?, mission_name = ?, " +
-                "start_date = ?, end_date = ?, status = ?, description = ? " +
-                "WHERE mission_id = ?";
+        String sql = "UPDATE Missions SET astronaut_id = ?, planet_id = ?, mission_name = ?, start_date = ?, end_date = ?, status = ?, description = ? WHERE mission_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, mission.getAstronaut().getAstronautId());
             stmt.setInt(2, mission.getPlanet().getPlanetId());
@@ -112,39 +92,42 @@ public class MissionDAO {
         }
     }
 
-    // ---- Métodos auxiliares para mapear fila a objeto Mission ----
+    //  BUSCADOR
+    public List<Mission> searchByName(String keyword) throws SQLException {
+        List<Mission> missions = new ArrayList<>();
+        String sql = "SELECT * FROM Missions WHERE mission_name LIKE ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + keyword + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    missions.add(mapRowToMission(rs));
+                }
+            }
+        }
+        return missions;
+    }
+
+    // Método utilitario para mapear ResultSet a objeto Mission
     private Mission mapRowToMission(ResultSet rs) throws SQLException {
         Mission m = new Mission();
         m.setMissionId(rs.getInt("mission_id"));
+
+        // relaciones
+        int astroId  = rs.getInt("astronaut_id");
+        int planetId = rs.getInt("planet_id");
+        AstronautDAO aDao = new AstronautDAO(conn);
+        PlanetDAO    pDao = new PlanetDAO(conn);
+        Astronaut    a    = aDao.getAstronautById(astroId);
+        Planet       p    = pDao.getPlanetById(planetId);
+
+        m.setAstronaut(a);
+        m.setPlanet(p);
         m.setMissionName(rs.getString("mission_name"));
         m.setStartDate(rs.getDate("start_date"));
-        m.setEndDate(rs.getDate("end_date"));
+        Date end = rs.getDate("end_date");
+        if (end != null) m.setEndDate(end);
         m.setStatus(rs.getString("status"));
         m.setDescription(rs.getString("description"));
-        m.setAstronaut(mapRowToAstronaut(rs));
-        m.setPlanet(mapRowToPlanet(rs));
         return m;
-    }
-
-    private Astronaut mapRowToAstronaut(ResultSet rs) throws SQLException {
-        Astronaut a = new Astronaut();
-        a.setAstronautId(rs.getInt("a_id"));
-        a.setName(rs.getString("a_name"));
-        a.setBirthDate(rs.getDate("a_birth_date"));
-        a.setNationality(rs.getString("a_nationality"));
-        a.setMissionsCompleted(rs.getInt("a_missions_completed"));
-        a.setActive(rs.getBoolean("a_active"));
-        return a;
-    }
-
-    private Planet mapRowToPlanet(ResultSet rs) throws SQLException {
-        Planet p = new Planet();
-        p.setPlanetId(rs.getInt("p_id"));
-        p.setName(rs.getString("p_name"));
-        p.setDiameter(rs.getInt("p_diameter"));
-        p.setDiscoveryDate(rs.getDate("p_discovery_date").toLocalDate());
-        p.setHasAtmosphere(rs.getBoolean("p_has_atmosphere"));
-        p.setDescription(rs.getString("p_description"));
-        return p;
     }
 }

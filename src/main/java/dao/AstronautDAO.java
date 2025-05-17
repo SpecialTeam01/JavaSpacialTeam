@@ -90,5 +90,19 @@ public class AstronautDAO {
         a.setActive(rs.getBoolean("active"));
         return a;
     }
-}
 
+    // BUSCADOR
+    public List<Astronaut> searchByName(String keyword) throws SQLException {
+        List<Astronaut> astronauts = new ArrayList<>();
+        String sql = "SELECT * FROM Astronauts WHERE name LIKE ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + keyword + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    astronauts.add(mapRowToAstronaut(rs));
+                }
+            }
+        }
+        return astronauts;
+    }
+}

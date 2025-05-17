@@ -6,6 +6,34 @@
         <h1 class="display-4">Welcome to Stellar Odyssey</h1>
         <p class="lead">Explore the galaxy</p>
     </div>
+    <div class="container py-3">
+        <form action="${pageContext.request.contextPath}/search"
+              method="get"
+              class="row g-2 justify-content-center">
+
+            <div class="col-auto">
+                <select name="type" class="form-select">
+                    <option value="astronaut">Astronauts</option>
+                    <option value="planet">Planets</option>
+                    <option value="mission">Missions</option>
+                </select>
+            </div>
+
+            <div class="col-auto">
+                <input type="text"
+                       name="keyword"
+                       class="form-control"
+                       placeholder="Enter name…"
+                       required />
+            </div>
+
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
 
     <div class="container py-5">
         <div class="row g-4">
