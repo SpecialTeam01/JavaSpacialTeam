@@ -96,7 +96,7 @@ public class AstronautServlet extends HttpServlet {
         Astronaut astronaut = astronautDAO.getAstronautById(id);
 
         // ===> AÑADIDO: determinamos el fichero de imagen correspondiente
-        String imageFile = IMAGE_MAP.getOrDefault(id, "default.png");
+        String imageFile = IMAGE_MAP.getOrDefault(id, "defautuser.jpg");
         req.setAttribute("imageFile", imageFile);
 
         req.setAttribute("astronaut", astronaut);

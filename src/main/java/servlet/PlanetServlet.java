@@ -94,7 +94,7 @@ public class PlanetServlet extends HttpServlet {
         Planet planet = planetDAO.getPlanetById(id);
 
         // ===> AÑADIDO: determinamos el fichero de imagen
-        String imageFile = IMAGE_MAP.getOrDefault(id, "default.png");
+        String imageFile = IMAGE_MAP.getOrDefault(id, "defautplanet.jpg");
         req.setAttribute("imageFile", imageFile);
 
         req.setAttribute("planet", planet);

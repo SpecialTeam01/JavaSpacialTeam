@@ -21,8 +21,9 @@
                         <th>Name</th>
                         <th>Birth Date</th>
                         <th>Nationality</th>
-                        <th># Missions</th>
+                        <th>Misions Completed</th>
                         <th>Active</th>
+                        <th>View</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -46,6 +47,8 @@
                         <td class="text-center align-middle">
                             <a href="<%= request.getContextPath() %>/astronaut?action=detail&id=<%= a.getAstronautId() %>"
                                class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-eye-fill"></i> View</a>
+                        </td>
+                        <td class="text-center align-middle">
                             <a href="<%= request.getContextPath() %>/astronaut?action=edit&id=<%= a.getAstronautId() %>"
                                class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-pencil-square"></i> Edit</a>
                             <a href="<%= request.getContextPath() %>/astronaut?action=delete&id=<%= a.getAstronautId() %>"

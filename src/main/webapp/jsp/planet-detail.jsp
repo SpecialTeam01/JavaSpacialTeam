@@ -9,7 +9,7 @@
   String imgFile    = (String) request.getAttribute("imageFile");
   // Ahora buscamos en /images/
   String imgPath    = request.getContextPath() + "/images/" + imgFile;
-  String defaultImg = request.getContextPath() + "/images/default.png";
+  String defaultImg = request.getContextPath() + "/images/defautplanet.jpg";
 %>
 
 <div class="container my-4">

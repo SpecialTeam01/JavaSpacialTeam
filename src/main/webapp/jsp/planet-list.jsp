@@ -22,6 +22,7 @@
         <th>Diameter (km)</th>
         <th>Discovery Date</th>
         <th>Has Atmosphere</th>
+        <th>View</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -41,7 +42,9 @@
                 : "<span class='text-danger fw-bold'>&#10007;</span>" %></td>
         <td class="text-center align-middle">
           <a href="<%= request.getContextPath() %>/planets?action=detail&id=<%= p.getPlanetId() %>"
-             class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-eye-fill"></i> View</a>
+          class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-eye-fill"></i> View</a>
+        </td>
+        <td class="text-center align-middle">
           <a href="<%= request.getContextPath() %>/planets?action=edit&id=<%= p.getPlanetId() %>"
              class="btn btn-sm btn-primary rounded-pill shadow-sm"><i class="bi bi-pencil-square"></i> Edit</a>
           <a href="<%= request.getContextPath() %>/planets?action=delete&id=<%= p.getPlanetId() %>"
