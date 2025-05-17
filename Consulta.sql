@@ -1,5 +1,4 @@
 -- Create database and use it
-
 CREATE DATABASE IF NOT EXISTS StellarOdyssey;
 USE StellarOdyssey;
 
@@ -40,7 +39,7 @@ FOREIGN KEY (planet_id) REFERENCES Planets(planet_id) ON DELETE CASCADE
 );
 
 -- Data for astronauts
-INSERT INTO Astronauts (name, birth_date, nationality, missions_completed, active) VALUES
+INSERT INTO Astronauts (name, birth_date, nationality, missions_completed, active, image) VALUES
 ('Nerea Tomas', '1997-10-31', 'Spain', 5, TRUE, 'nerea.png'),
 ('Miguel Chavarria', '1998-06-22', 'Spain', 3, TRUE, 'miguel.png'),
 ('Kenny Pineda', '1995-01-31', 'Spain', 2, TRUE, 'kenny.png'),
@@ -50,11 +49,11 @@ INSERT INTO Astronauts (name, birth_date, nationality, missions_completed, activ
 
 -- Data for Planets
 INSERT INTO Planets (name, diameter, discovery_date, has_atmosphere, description, image) VALUES
-('Mars', 6779, '1659-07-13', FALSE, 'Fourth planet in the Solar System'),
-('Europa', 3122, '1610-01-08', FALSE, 'Jupiter moon with potential subsurface ocean'),
-('Titan', 5150, '1655-03-25', TRUE, 'Saturn moon with methane lakes'),
-('Kepler-186f', 11000, '2014-04-17', TRUE, 'Exoplanet located in the habitable zone of its star'),
-('Proxima Centauri b', 12000, '2016-08-24', TRUE, 'Closest exoplanet to the Solar System');
+('Mars', 6779, '1659-07-13', FALSE, 'Fourth planet in the Solar System','mars.png'),
+('Europa', 3122, '1610-01-08', FALSE, 'Jupiter moon with potential subsurface ocean','europa.png'),
+('Titan', 5150, '1655-03-25', TRUE, 'Saturn moon with methane lakes','titan.png'),
+('Kepler-186f', 11000, '2014-04-17', TRUE, 'Exoplanet located in the habitable zone of its star','Kepler-186f.png'),
+('Proxima Centauri b', 12000, '2016-08-24', TRUE, 'Closest exoplanet to the Solar System','Proxima-Centauri-b.png');
 
 -- Data for Missions
 INSERT INTO Missions (astronaut_id, planet_id, mission_name, start_date, end_date, status, description) VALUES
