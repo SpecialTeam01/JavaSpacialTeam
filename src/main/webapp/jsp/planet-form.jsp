@@ -19,8 +19,10 @@
           ? planet.getDescription() : "";
 %>
 
-<div class="container my-4">
-  <h2><%= edit ? "Edit Planet" : "New Planet" %></h2>
+<div class="container my-5" style="max-width: 600px;">
+  <h2>
+    <i class="fa-solid fa-globe"></i>
+    <%= edit ? "Edit Planet" : "New Planet" %></h2>
 
   <form method="post" action="<%= request.getContextPath() %>/planets">
     <% if (edit) { %>
@@ -30,26 +32,26 @@
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
       <input type="text" id="name" name="name"
-             class="form-control" required
+             class="form-control rounded-pill" required
              value="<%= nameValue %>"/>
     </div>
 
     <div class="mb-3">
       <label for="diameter" class="form-label">Diameter (km)</label>
       <input type="number" id="diameter" name="diameter"
-             class="form-control" min="0"
+             class="form-control rounded-pill" min="0"
              value="<%= diameterValue %>"/>
     </div>
 
     <div class="mb-3">
       <label for="discoveryDate" class="form-label">Discovery Date</label>
       <input type="date" id="discoveryDate" name="discoveryDate"
-             class="form-control" required
+             class="form-control rounded-pill" required
              value="<%= discoveryValue %>"/>
     </div>
 
     <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox"
+      <input class="form-check-input rounded-pill" type="checkbox"
              id="hasAtmosphere" name="hasAtmosphere"
               <%= hasAtmos ? "checked" : "" %>/>
       <label class="form-check-label" for="hasAtmosphere">

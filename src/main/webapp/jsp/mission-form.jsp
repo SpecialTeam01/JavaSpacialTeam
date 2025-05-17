@@ -81,7 +81,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary"><%= edit ? "Update" : "Create" %></button>
-    <a href="<%= request.getContextPath() %>/missions" class="btn btn-secondary">Cancel</a>
+    <a href="<%= request.getContextPath() %>/mission" class="btn btn-secondary">Cancel</a>
   </form>
 </div>
 
