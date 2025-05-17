@@ -55,6 +55,7 @@ INSERT INTO Planets (name, diameter, discovery_date, has_atmosphere, description
 ('Kepler-186f', 11000, '2014-04-17', TRUE, 'Exoplanet located in the habitable zone of its star','Kepler-186f.png'),
 ('Proxima Centauri b', 12000, '2016-08-24', TRUE, 'Closest exoplanet to the Solar System','Proxima-Centauri-b.png');
 
+
 -- Data for Missions
 INSERT INTO Missions (astronaut_id, planet_id, mission_name, start_date, end_date, status, description) VALUES
 (1, 3, 'Titan Exploration', '2036-04-12', '2036-07-20', 'Completed', 'Exploration of methane lakes on Titan'),
