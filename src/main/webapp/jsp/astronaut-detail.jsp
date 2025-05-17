@@ -6,33 +6,38 @@
 <%
   Astronaut astro = (Astronaut) request.getAttribute("astronaut");
 %>
-<div class="container my-4">
-  <h2> <i class="fa-solid fa-user-astronaut"></i> Astronaut Details</h2>
+<div class="row mt-3 align-items-start">
+  <!-- Columna izquierda: Detalles -->
+  <div class="col-md-7">
+    <dl class="row">
+      <dt class="col-sm-4">ID</dt>
+      <dd class="col-sm-8"><%= astro.getAstronautId() %></dd>
 
-  <dl class="row mt-3">
-    <dt class="col-sm-3">ID</dt>
-    <dd class="col-sm-9"><%= astro.getAstronautId() %></dd>
+      <dt class="col-sm-4">Name</dt>
+      <dd class="col-sm-8"><%= astro.getName() %></dd>
 
-    <dt class="col-sm-3">Name</dt>
-    <dd class="col-sm-9"><%= astro.getName() %></dd>
+      <dt class="col-sm-4">Birth Date</dt>
+      <dd class="col-sm-8"><%= astro.getBirthDate() %></dd>
 
-    <dt class="col-sm-3">Birth Date</dt>
-    <dd class="col-sm-9"><%= astro.getBirthDate() %></dd>
+      <dt class="col-sm-4">Nationality</dt>
+      <dd class="col-sm-8"><%= astro.getNationality() %></dd>
 
-    <dt class="col-sm-3">Nationality</dt>
-    <dd class="col-sm-9"><%= astro.getNationality() %></dd>
+      <dt class="col-sm-4">Missions Completed</dt>
+      <dd class="col-sm-8"><%= astro.getMissionsCompleted() %></dd>
 
-    <dt class="col-sm-3">Missions Completed</dt>
-    <dd class="col-sm-9"><%= astro.getMissionsCompleted() %></dd>
+      <dt class="col-sm-4">Active</dt>
+      <dd class="col-sm-8"><%= astro.isActive() ? "Yes" : "No" %></dd>
+    </dl>
+    <a href="<%= request.getContextPath() %>/astronaut" class="btn btn-light">← Back to list</a>
+  </div>
 
-    <dt class="col-sm-3">Active</dt>
-    <dd class="col-sm-9">
-      <%= astro.isActive() ? "Yes" : "No" %>
-    </dd>
-  </dl>
-
-  <a href="<%= request.getContextPath() %>/astronaut"
-     class="btn btn-light">← Back to list</a>
+  <!-- Columna derecha: Imagen -->
+  <div class="col-md-5 text-center">
+    <img src="<%= request.getContextPath() %>/images/astronauts/1.png"
+         alt="Astronaut photo"
+         class="img-fluid rounded shadow"
+         style="max-height: 300px;">
+  </div>
 </div>
 
 <%@ include file="/includes/footer.jsp" %>
