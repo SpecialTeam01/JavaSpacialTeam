@@ -60,6 +60,9 @@ html, body {
     border-color:     var(--blue-claro) !important;
     color:            var(--blue-intenso) !important;
 }
+.btn-toolbar {
+    background-color: var(--blue-medio)  !important;
+}
 
 /* Cartas (cards) */
 .card {
@@ -109,6 +112,50 @@ footer.footer {
     box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
     transition: all 0.3s ease;
 }
+
+/* Estilos personalizados para los botones de paginacion */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.custom-pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.custom-pagination .page-item {
+    margin: 0;
+}
+
+.custom-pagination .page-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.custom-pagination .page-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.custom-pagination .page-item.active .page-link {
+    background-color: var(--blue-oscuro);
+    color: #000000;
+    font-weight: bold;
+    pointer-events: none;
+}
+
 
 /* MediaQueries para adaptar las tablas a pantallas pequeñas */
 @media (max-width: 576px) {
