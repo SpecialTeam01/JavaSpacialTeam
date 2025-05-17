@@ -10,7 +10,8 @@ name VARCHAR(100) NOT NULL,
 birth_date DATE NOT NULL,
 nationality VARCHAR(50),
 missions_completed INT DEFAULT 0,
-active BOOLEAN DEFAULT TRUE
+active BOOLEAN DEFAULT TRUE,
+image VARCHAR(100)
 );
 
 -- PLANETS
@@ -38,10 +39,13 @@ FOREIGN KEY (planet_id) REFERENCES Planets(planet_id) ON DELETE CASCADE
 );
 
 -- Data for astronauts
-INSERT INTO Astronauts (name, birth_date, nationality, missions_completed, active) VALUES
-('Nerea Tomas', '1997-10-31', 'Spain', 5, TRUE),
-('Miguel Chavarria', '1998-06-22', 'Spain', 3, TRUE),
-('Kenny Pineda', '1995-01-31', 'Spain', 2, TRUE);
+INSERT INTO Astronauts (name, birth_date, nationality, missions_completed, active, image) VALUES
+('Nerea Tomas', '1997-10-31', 'Spain', 5, TRUE, 'nerea.png'),
+('Miguel Chavarria', '1998-06-22', 'Spain', 3, TRUE, 'miguel.png'),
+('Kenny Pineda', '1995-01-31', 'Spain', 2, TRUE, 'kenny.png'),
+('Vanessa Lorente', '1995-01-31', 'Spain', 2, TRUE, 'vanessa.png'),
+('Angel Ladrero', '1995-01-31', 'Spain', 2, TRUE, 'angel.png'),
+('Santiago Faci', '1995-01-31', 'Spain', 2, TRUE, 'santiago.png');
 
 -- Data for Planets
 INSERT INTO Planets (name, diameter, discovery_date, has_atmosphere, description) VALUES

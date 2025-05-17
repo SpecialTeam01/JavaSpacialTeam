@@ -8,7 +8,10 @@
 
 /* Fondo y texto global */
 html, body {
-    background-color: var(--blue-intenso) !important;
+    background-image: url("../images/fondomision.png");
+    /*filter: blur(2px);*/
+    z-index: -1;
+    background-color: transparent !important;
     color:            var(--blue-claro)  !important;
 }
 
